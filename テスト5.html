@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>筋トレサポートダッシュボード</title>
+    <style>
+        /* --- 基本スタイル --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2列のグリッドレイアウト */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            grid-column: 1 / -1; /* タイトルを全幅に */
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #e74c3c;
+            border-left: 5px solid #e74c3c;
+            padding-left: 10px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        /* --- 筋トレ飯スタイル --- */
+        .meal-detail {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .meal-detail strong {
+            color: #2980b9;
+        }
+        
+        /* --- 筋トレログスタイル (選択式入力に変更) --- */
+        .log-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .log-input-group label {
+            font-weight: bold;
+            white-space: nowrap; /* テキストの折り返しを防ぐ */
+        }
+        .log-input-group select, .log-input-group input[type="number"] {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #add-log-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #2ecc71; /* 緑色のボタン */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #add-log-btn:hover {
+            background-color: #27ae60;
+        }
+        .log-entry {
+            border-bottom: 1px dashed #ccc;
+            padding: 10px 0;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-entry p {
+            margin: 5px 0;
+        }
+
+        /* --- グラフスタイル --- */
+        .graph-section {
+            grid-column: 1 / -1; /* グラフセクションを全幅に */
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* グラフを2列に分割 */
+            gap: 20px;
+        }
+        .graph-card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .graph-area {
+            height: 250px; /* グラフエリアの高さ設定 */
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            position: relative;
+            padding: 15px;
+        }
+        .bar-container {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            gap: 5px;
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
+        .bar {
+            width: 10%;
+            background-color: #3498db;
+            transition: height 0.5s ease;
+            position: relative;
+            border-radius: 3px 3px 0 0;
+        }
+        .bar.warning { /* 混雑時の色 */
+            background-color: #e74c3c;
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #555;
+        }
+        .bar-value {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .bar.warning .bar-value {
+             color: #e74c3c;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ 筋トレサポートダッシュボード 🚀</h1>
+        
+        <div class="card" id="recommended-meal">
+            <h2>🍴 本日のおすすめ筋トレ飯</h2>
+            <div class="meal-detail">
+                <p><strong>メニュー名:</strong> 鮭の味噌マヨホイル焼き＆玄米</p>
+                <h3>栄養ポイント</h3>
+                <ul>
+                    <li><strong>良質な脂質:</strong> 鮭に含まれるDHA・EPA（オメガ3脂肪酸）が回復をサポート。</li>
+                    <li><strong>複合炭水化物:</strong> 玄米でエネルギーを長時間供給し、インスリンを安定化。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" id="training-log">
+            <h2>📝 筋トレログ</h2>
+            
+            <h3>本日のトレーニングを記録</h3>
+            <div class="log-input-group">
+                <label for="exercise">種目:</label>
+                <select id="exercise">
+                    <option value="benchpress">ベンチプレス (胸)</option>
+                    <option value="squat">スクワット (脚)</option>
+                    <option value="deadlift">デッドリフト (背中)</option>
+                    <option value="latpulldown">ラットプルダウン (背中)</option>
+                    <option value="shoulderpress">ショルダープレス (肩)</option>
+                    <option value="armcurl">アームカール (腕)</option>
+                    <option value="crunch">クランチ (腹筋)</option>
+                </select>
+            </div>
+
+            <div class="log-input-group">
+                <label for="reps">回数 (Reps):</label>
+                <select id="reps">
+                    <option value="6">6回</option>
+                    <option value="8">8回</option>
+                    <option value="10" selected>10回</option>
+                    <option value="12">12回</option>
+                    <option value="15">15回</option>
+                </select>
+            </div>
+
+            <div class="log-input-group">
+                <label for="sets">セット数 (Sets):</label>
+                <select id="sets">
+                    <option value="2">2セット</option>
+                    <option value="3" selected>3セット</option>
+                    <option value="4">4セット</option>
+                    <option value="5">5セット</option>
+                </select>
+            </div>
+            
+            <button id="add-log-btn">ログを追加</button>
+
+            <h3 style="margin-top: 20px;">過去のログ</h3>
+            <div class="log-entry">
+                <strong>2025/10/06 (月) - 胸・三頭筋</strong>
+                <p>ベンチプレス: 80kg × 8回 × 3セット</p>
+                <p>ディップス: 自重 × 10回 × 3セット</p>
+            </div>
+            
+            <div class="log-entry">
+                <strong>2025/10/04 (土) - 背中・二頭筋</strong>
+                <p>デッドリフト: 100kg × 5回 × 3セット</p>
+                <p>ラットプルダウン: 40kg × 12回 × 3セット</p>
+            </div>
+        </div>
+
+        <div class="graph-section">
+            
+            <div class="graph-card">
+                <h2>📊 現在の混雑状況 (1時間ごとのグラフ)</h2>
+                <div class="graph-area">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 40%;"><span class="bar-value">12</span><span class="bar-label">14:40</span></div>
+                        <div class="bar" style="height: 55%;"><span class="bar-value">16</span><span class="bar-label">14:50</span></div>
+                        <div class="bar warning" style="height: 85%;"><span class="bar-value">25</span><span class="bar-label">15:00</span></div>
+                        <div class="bar warning" style="height: 95%;"><span class="bar-value">28</span><span class="bar-label">15:10</span></div>
+                        <div class="bar warning" style="height: 90%;"><span class="bar-value">27</span><span class="bar-label">15:20</span></div>
+                        <div class="bar" style="height: 75%;"><span class="bar-value">22</span><span class="bar-label">15:30</span></div>
+                        <div class="bar" style="height: 60%;"><span class="bar-value">18</span><span class="bar-label">15:40</span></div>
+                        <div class="bar" style="height: 45%;"><span class="bar-value">13</span><span class="bar-label">15:50</span></div>
+                        <div class="bar" style="height: 35%;"><span class="bar-value">10</span><span class="bar-label">16:00</span></div>
+                        <div class="bar" style="height: 30%;"><span class="bar-value">9</span><span class="bar-label">16:10</span></div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 0.9em; color: #7f8c8d; margin-top: 30px;">※ 現在時刻 15:10 の混雑度は「高」です。</p>
+            </div>
+
+            <div class="graph-card">
+                <h2>📈 前週の同じ曜日の混雑状況</h2>
+                <div class="graph-area">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 50%;"><span class="bar-value">15</span><span class="bar-label">14:40</span></div>
+                        <div class="bar" style="height: 60%;"><span class="bar-value">18</span><span class="bar-label">14:50</span></div>
+                        <div class="bar warning" style="height: 90%;"><span class="bar-value">26</span><span class="bar-label">15:00</span></div>
+                        <div class="bar warning" style="height: 80%;"><span class="bar-value">23</span><span class="bar-label">15:10</span></div>
+                        <div class="bar warning" style="height: 85%;"><span class="bar-value">24</span><span class="bar-label">15:20</span></div>
+                        <div class="bar" style="height: 70%;"><span class="bar-value">20</span><span class="bar-label">15:30</span></div>
+                        <div class="bar" style="height: 65%;"><span class="bar-value">19</span><span class="bar-label">15:40</span></div>
+                        <div class="bar" style="height: 50%;"><span class="bar-value">15</span><span class="bar-label">15:50</span></div>
+                        <div class="bar" style="height: 40%;"><span class="bar-value">12</span><span class="bar-label">16:00</span></div>
+                        <div class="bar" style="height: 30%;"><span class="bar-value">9</span><span class="bar-label">16:10</span></div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 0.9em; color: #7f8c8d; margin-top: 30px;">※ 今週は前週よりも全体的に若干混雑しています。</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
