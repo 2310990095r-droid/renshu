@@ -1,0 +1,252 @@
+/* ================================================= */
+/* style.css                    */
+/* ================================================= */
+
+/* --- 基本スタイル --- */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px; /* bodyのpaddingをこちらに移す */
+}
+
+/* 個別コンテンツページのカードスタイル */
+.card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 見出しの共通スタイル */
+h2 {
+    color: #e74c3c; /* 各ページで上書き可能 */
+    border-left: 5px solid #e74c3c; /* 各ページで上書き可能 */
+    padding-left: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+h3 {
+    color: #3498db;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* メインメニュー (index.html) のスタイル */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.card-link {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+.card-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+.card-link h2 {
+    font-size: 1.5em;
+    margin: 0 0 10px 0;
+    padding: 0;
+    border-left: none; 
+    border-bottom: 3px solid; 
+    padding-bottom: 5px;
+}
+.card-link p {
+    font-size: 0.9em;
+    color: #666;
+}
+/* カテゴリごとの配色 (index.html) */
+.meal h2 { color: #e67e22; border-color: #e67e22; }
+.log h2 { color: #2ecc71; border-color: #2ecc71; }
+.current-traffic h2 { color: #e74c3c; border-color: #e74c3c; }
+.weekly-traffic h2 { color: #9b59b6; border-color: #9b59b6; }
+
+
+/* --- ログ入力フォームのスタイル (log.html) --- */
+.log-input-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.log-input-group label {
+    font-weight: bold;
+    margin-right: 10px;
+    width: 100px;
+}
+.log-input-group input[type="number"], .log-input-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+    max-width: 200px;
+}
+#add-log-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: 20px;
+}
+#add-log-btn:hover {
+    background-color: #27ae60;
+}
+
+/* --- ログ履歴のスタイル (log.html) --- */
+.log-entry {
+    border-bottom: 1px dashed #ccc;
+    padding: 10px 0;
+    position: relative; 
+    padding-right: 50px; 
+}
+.delete-log-btn {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    transition: background-color 0.3s;
+}
+.delete-log-btn:hover {
+    background-color: #c0392b;
+}
+
+/* --- 混雑状況グラフのスタイル (current_traffic.html, weekly_traffic.html) --- */
+.graph-card {
+    padding: 25px;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+.graph-area { 
+    height: 250px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    position: relative;
+    padding: 15px;
+}
+.bar-container { 
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    gap: 5px;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+.bar { 
+    width: 10%; 
+    background-color: #3498db; 
+    transition: height 0.5s ease;
+    position: relative;
+    border-radius: 3px 3px 0 0;
+}
+.bar.warning {
+    background-color: #e74c3c;
+}
+.bar-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #555;
+}
+.bar-value {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #3498db;
+}
+.bar.warning .bar-value {
+     color: #e74c3c;
+}
+
+/* --- 共通の戻るリンク --- */
+.back-link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #3498db; /* 基本色 */
+    text-decoration: none;
+    font-size: 1.1em;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* 📱 レスポンシブ対応 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+    .log-input-group {
+        display: block;
+    }
+    .log-input-group label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .log-input-group input[type="number"], .log-input-group select {
+        max-width: 100%;
+    }
+}
