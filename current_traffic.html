@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 現在の混雑状況</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSSの上書き: 統一感を出すため */
+        header { background-color: #e74c3c; }
+        h2 { color: #e74c3c; border-left-color: #e74c3c; }
+        .bar { background-color: #3498db; } 
+        .bar.warning { background-color: #e74c3c; } 
+        .bar-value { color: #3498db; }
+        .back-link { color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 現在の混雑状況 (1時間ごとのグラフ)</h1>
+        </header>
+
+        <div class="graph-card card">
+            <h2>現在の混雑状況 (1時間ごとのグラフ)</h2>
+            <div class="graph-area">
+                <div class="bar-container">
+                    <div class="bar" style="height: 40%;"><span class="bar-value">12</span><span class="bar-label">14:40</span></div>
+                    <div class="bar" style="height: 55%;"><span class="bar-value">16</span><span class="bar-label">14:50</span></div>
+                    <div class="bar warning" style="height: 85%;"><span class="bar-value">25</span><span class="bar-label">15:00</span></div>
+                    <div class="bar warning" style="height: 95%;"><span class="bar-value">28</span><span class="bar-label">15:10</span></div>
+                    <div class="bar warning" style="height: 90%;"><span class="bar-value">27</span><span class="bar-label">15:20</span></div>
+                    <div class="bar" style="height: 75%;"><span class="bar-value">22</span><span class="bar-label">15:30</span></div>
+                    <div class="bar" style="height: 60%;"><span class="bar-value">18</span><span class="bar-label">15:40</span></div>
+                    <div class="bar" style="height: 45%;"><span class="bar-value">13</span><span class="bar-label">15:50</span></div>
+                    <div class="bar" style="height: 35%;"><span class="bar-value">10</span><span class="bar-label">16:00</span></div>
+                    <div class="bar" style="height: 30%;"><span class="bar-value">9</span><span class="bar-label">16:10</span></div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.9em; color: #7f8c8d; margin-top: 50px;">※ 現在時刻 15:10 の混雑度は「高」です。</p>
+        </div>
+        
+        <a href="index.html" class="back-link">⬅️ メインメニューに戻る</a>
+    </div>
+</body>
+</html>
