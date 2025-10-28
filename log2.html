@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 筋トレログ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSSの上書き: 統一感を出すため */
+        header { background-color: #2ecc71; }
+        h2 { color: #2ecc71; border-left-color: #2ecc71; }
+        .back-link { color: #2ecc71; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 筋トレログ</h1>
+        </header>
+        
+        <div class="card" id="training-log">
+            <h2>📝 筋トレログ</h2>
+            
+            <h3>本日のトレーニングを記録</h3>
+            <div class="log-input-group">
+                <label for="exercise">種目:</label>
+                <select id="exercise">
+                    <optgroup label="胸 (Chest)">
+                        <option value="benchpress">ベンチプレス</option><option value="incline_press">インクラインベンチプレス</option><option value="dumbbell_press">ダンベルプレス</option>
+                        <option value="pec_fly">ペックフライ</option><option value="push_up">プッシュアップ (自重)</option>
+                    </optgroup>
+                    <optgroup label="背中 (Back)">
+                        <option value="deadlift">デッドリフト</option><option value="latpulldown">ラットプルダウン</option><option value="bentover_row">ベントオーバーロウ</option>
+                        <option value="seated_row">シーテッドロウ</option><option value="pull_up">懸垂 (プルアップ/自重)</option>
+                    </optgroup>
+                    <optgroup label="脚 (Legs)">
+                        <option value="squat">スクワット</option><option value="leg_press">レッグプレス</option><option value="romanian_deadlift">ルーマニアンデッドリフト (RDL)</option>
+                        <option value="leg_extension">レッグエクステンション</option><option value="leg_curl">レッグカール</option><option value="calf_raise">カーフレイズ</option>
+                    </optgroup>
+                    <optgroup label="肩 (Shoulders)">
+                        <option value="shoulderpress">ショルダープレス (ミリタリープレス)</option><option value="side_raise">サイドレイズ</option>
+                        <option value="front_raise">フロントレイズ</option><option value="reverse_fly">リアレイズ (リバースフライ)</option>
+                    </optgroup>
+                    <optgroup label="腕 (Arms)">
+                        <option value="armcurl">バーベル/ダンベルカール (二頭筋)</option><option value="triceps_extension">トライセップスエクステンション (三頭筋)</option>
+                        <option value="hammer_curl">ハンマーカール</option><option value="cable_pushdown">ケーブルプッシュダウン</option>
+                    </optgroup>
+                    <optgroup label="体幹 (Core)">
+                        <option value="crunch">クランチ (腹筋)</option><option value="leg_raise">レッグレイズ</option><option value="plank">プランク (静的)</option>
+                        <option value="russian_twist">ロシアンツイスト</option>
+                    </optgroup>
+                    <optgroup label="その他">
+                        <option value="cardio">有酸素運動 (ランニング/バイク)</option><option value="stretch">ストレッチ/柔軟</option>
+                    </optgroup>
+                </select>
+            </div>
+            
+            <div class="log-input-group">
+                <label for="weight">重量 (kg):</label>
+                <input type="number" id="weight" min="1" value="60"> 
+            </div>
+
+            <div class="log-input-group">
+                <label for="reps">回数 (Reps):</label>
+                <select id="reps">
+                    <option value="6">6回</option><option value="8">8回</option><option value="10" selected>10回</option>
+                    <option value="12">12回</option><option value="15">15回</option>
+                </select>
+            </div>
+
+            <div class="log-input-group">
+                <label for="sets">セット数 (Sets):</label>
+                <select id="sets">
+                    <option value="2">2セット</option><option value="3" selected>3セット</option>
+                    <option value="4">4セット</option><option value="5">5セット</option>
+                </select>
+            </div>
+            
+            <button id="add-log-btn">ログを追加</button>
+
+            <h3 style="margin-top: 20px;">過去のログ (履歴)</h3>
+            <div id="past-logs"> 
+                <p>ログがありません。</p>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-link">⬅️ メインメニューに戻る</a>
+    </div>
+    <script src="log.js"></script>
+</body>
+</html>
