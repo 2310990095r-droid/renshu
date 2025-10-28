@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📈 前週の同じ曜日の混雑状況</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSSの上書き: 統一感を出すため */
+        header { background-color: #9b59b6; }
+        h2 { color: #9b59b6; border-left-color: #9b59b6; }
+        .bar { background-color: #9b59b6; } /* グラフの基本色を紫に */
+        .bar.warning { background-color: #c0392b; } /* グラフの警告色を暗めの赤に */
+        .bar-value { color: #9b59b6; }
+        .back-link { color: #9b59b6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 前週の同じ曜日の混雑状況</h1>
+        </header>
+
+        <div class="graph-card card">
+            <h2>前週の同じ曜日の混雑状況</h2>
+            <div class="graph-area">
+                <div class="bar-container">
+                    <div class="bar" style="height: 50%;"><span class="bar-value">15</span><span class="bar-label">14:40</span></div>
+                    <div class="bar" style="height: 60%;"><span class="bar-value">18</span><span class="bar-label">14:50</span></div>
+                    <div class="bar warning" style="height: 90%;"><span class="bar-value">26</span><span class="bar-label">15:00</span></div>
+                    <div class="bar" style="height: 80%;"><span class="bar-value">23</span><span class="bar-label">15:10</span></div>
+                    <div class="bar warning" style="height: 85%;"><span class="bar-value">24</span><span class="bar-label">15:20</span></div>
+                    <div class="bar" style="height: 70%;"><span class="bar-value">20</span><span class="bar-label">15:30</span></div>
+                    <div class="bar" style="height: 65%;"><span class="bar-value">19</span><span class="bar-label">15:40</span></div>
+                    <div class="bar" style="height: 50%;"><span class="bar-value">15</span><span class="bar-label">15:50</span></div>
+                    <div class="bar" style="height: 40%;"><span class="bar-value">12</span><span class="bar-label">16:00</span></div>
+                    <div class="bar" style="height: 30%;"><span class="bar-value">9</span><span class="bar-label">16:10</span></div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.9em; color: #7f8c8d; margin-top: 50px;">※ 今週は前週よりも全体的に若干混雑しています。</p>
+        </div>
+        
+        <a href="index.html" class="back-link">⬅️ メインメニューに戻る</a>
+    </div>
+</body>
+</html>
